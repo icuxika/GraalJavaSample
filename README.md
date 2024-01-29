@@ -26,3 +26,17 @@ mvn package
 mvn exec:exec@image
 .\target\buildImage\GraalJavaSample\GraalJavaSample.exe
 ```
+
+## gradle
+```shell
+gradlew.bat nativeCompile
+```
+
+### 构建可执行jar
+```shell
+gradlew.bat shadowJar
+```
+
+```shell
+gradlew.bat uberJar
+```
