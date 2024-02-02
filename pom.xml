@@ -84,6 +84,20 @@
                                             <mainClass>${mainClass}</mainClass>
                                         </transformer>
                                     </transformers>
+                                    <filters>
+                                        <filter>
+                                            <!--
+                                                Shading signed JARs will fail without this.
+                                                http://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar
+                                            -->
+                                            <artifact>*:*</artifact>
+                                            <excludes>
+                                                <exclude>META-INF/*.SF</exclude>
+                                                <exclude>META-INF/*.DSA</exclude>
+                                                <exclude>META-INF/*.RSA</exclude>
+                                            </excludes>
+                                        </filter>
+                                    </filters>
                                 </configuration>
                             </execution>
                         </executions>
@@ -124,6 +138,14 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
